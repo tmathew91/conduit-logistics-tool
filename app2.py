@@ -54,9 +54,13 @@ with tab1:
                 st.success("✅ Orders filtered successfully!")
                 st.dataframe(filtered_df)
 
-                st.info("📋 Click button below to copy results to clipboard.")
-                text_to_copy = filtered_df.to_csv(sep="\t", index=False)
-                copy_to_clipboard_button(text_to_copy, "Copy Filtered Orders")
+                st.download_button(
+                label="📥 Download Filtered Orders",
+                data=filtered_df.to_csv(index=False).encode("utf-8"),
+                file_name="filtered_orders.csv",
+                mime="text/csv"
+)
+
 
 
             except Exception as e:
@@ -87,8 +91,12 @@ with tab2:
                 st.success("📦 Pack calculation complete!")
                 st.dataframe(result)
 
-                text_to_copy = result.to_csv(sep="\t", index=False)
-                copy_to_clipboard_button(text_to_copy, "Copy Packs Table")
+                st.download_button(
+                label="📥 Download Pack Results",
+                data=result.to_csv(index=False).encode("utf-8"),
+                file_name="pack_calculation.csv",
+                mime="text/csv")
+
 
 
         except Exception as e:
